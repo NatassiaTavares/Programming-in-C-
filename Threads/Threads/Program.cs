@@ -10,6 +10,20 @@ namespace Threads
     class Program
     {
         /// <summary>
+        /// Cada thread tem a sua própria cópia do campo (_field vai de 1 a 10 para cada thread)
+        /// </summary>
+        //[ThreadStatic]
+        //public static int _field;
+
+        /// <summary>
+        /// Inicializa uma variável local para cada thread
+        /// </summary>
+        public static ThreadLocal<int> _field =
+            new ThreadLocal<int>(() => {
+                return Thread.CurrentThread.ManagedThreadId;
+            });
+
+        /// <summary>
         /// Método 1 - Threads
         /// </summary>
         public static void ThreadMethod()
@@ -35,19 +49,89 @@ namespace Threads
 
         static void Main(string[] args)
         {
-            //Chamada sem parâmetro
-            Thread t = new Thread(new ThreadStart(ThreadMethod));
-            //Quando é backgroud as threads são fechadas no fim do main.
-            //Quando não é, o main espera as threads serem executadas.
-            t.IsBackground = false;
-            t.Start();
+            ////Chamada sem parâmetro
+            //Thread t = new Thread(new ThreadStart(ThreadMethod));
+            ////Quando é backgroud as threads são fechadas no fim do main.
+            ////Quando não é, o main espera as threads serem executadas.
+            //t.IsBackground = false;
+            //t.Start();
 
-            //Chamada com parâmetro
-            Thread t2 = new Thread(new ParameterizedThreadStart(ThreadMethod));
-            t2.Start(5);
-            t2.Join();
+            ////Chamada com parâmetro
+            //Thread t = new Thread(new ParameterizedThreadStart(ThreadMethod));
+            //t.Start(5);
+            //t.Join();
 
-            
+            ////Chamada com variável pra parar a execução
+            //bool stopped = false;
+
+            //Thread t = new Thread(new ThreadStart(() => {
+            //    while (!stopped)
+            //    {
+            //        Console.WriteLine("Running...");
+            //        Thread.Sleep(1000);
+            //    }
+            //}));
+
+            //t.Start();
+            //Console.WriteLine("Press any key to exit");
+            //Console.ReadKey();
+
+            //stopped = true;
+
+            //t.Join();
+
+            //new Thread(()=>
+            //{
+            //    for (int x = 0; x<10; x++)
+            //    {
+            //        _field++;
+            //        Console.WriteLine("Thread A: {0}", _field);
+            //    }
+            //}).Start();
+
+            //new Thread(() =>
+            //{
+            //    for (int x = 0; x < 10; x++)
+            //    {
+            //        _field++;
+            //        Console.WriteLine("Thread B: {0}", _field);
+            //    }
+            //}).Start();
+
+            //Console.ReadKey();
+
+            //Variável local para cada thread
+            //new Thread(() =>
+            //{
+            //    for (int x = 0; x < _field.Value; x++)
+            //    {
+            //        Console.WriteLine("Thread A: {0}", x);
+            //    }
+            //}).Start();
+
+            //new Thread(() =>
+            //{
+            //    for (int x = 0; x < _field.Value; x++)
+            //    {
+            //        Console.WriteLine("Thread B: {0}", x);
+            //    }
+            //}).Start();
+
+            //Console.ReadKey();
+
+            //Thread Pool
+            ThreadPool.QueueUserWorkItem((s) =>
+            {
+                Console.WriteLine("Working on a thread from threadpool");
+
+                Console.ReadLine();
+            });
+
+            new Thread(() =>
+               {
+                   Console.WriteLine("Thread");
+               }).Start();
         }
     }
 }
+    
