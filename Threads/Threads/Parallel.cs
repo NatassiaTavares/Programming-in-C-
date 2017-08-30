@@ -2,18 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Threads
 {
-    class Program
+    class Parallel
     {
-
-        static void Main(string[] args)
-        {
-            Tasks.TasksManager();
-        }
     }
 }
-    
