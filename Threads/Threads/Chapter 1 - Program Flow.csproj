@@ -42,7 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Asynchronous..cs" />
+    <Compile Include="ConcurrentCollections.cs" />
     <Compile Include="Parallel.cs" />
+    <Compile Include="PLINQ.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tasks.cs" />

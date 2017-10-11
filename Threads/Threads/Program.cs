@@ -12,7 +12,12 @@ namespace Threads
 
         static void Main(string[] args)
         {
-            Tasks.TasksManager();
+            //Tasks.TasksManager();
+            //Parallels.ParallelManager();
+            //Asynchronous.AsyncManager();
+            //PLINQ.Example1();
+            //ConcurrentCollections.BlockingCollectionExample();
+            ConcurrentCollections.ConcurrentBagEnumerateExample();
         }
     }
 }
