@@ -17,7 +17,9 @@ namespace Threads
             //Asynchronous.AsyncManager();
             //PLINQ.Example1();
             //ConcurrentCollections.BlockingCollectionExample();
-            ConcurrentCollections.ConcurrentBagEnumerateExample();
+            //ConcurrentCollections.ConcurrentBagEnumerateExample();
+            //ConcurrentCollections.ConcurrentStackExample();
+            ConcurrentCollections.ConcurrentQueueExample();
         }
     }
 }

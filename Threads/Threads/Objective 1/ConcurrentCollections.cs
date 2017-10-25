@@ -81,5 +81,52 @@ namespace Threads
             }).Wait();
         }
 
+        public static void ConcurrentStackExample()
+        {
+            ConcurrentStack<int> stack = new ConcurrentStack<int>();
+
+            stack.Push(42);
+
+            int result;
+            if (stack.TryPop(out result))
+                Console.WriteLine("Popped: {0}", result);
+
+            stack.PushRange(new int[] { 1, 2, 3});
+
+            int[] values = new int[2];
+            stack.TryPopRange(values);
+
+            foreach (int i in values)
+                Console.WriteLine(i);
+        }
+
+        public static void ConcurrentQueueExample()
+        {
+            ConcurrentQueue<int> queue = new ConcurrentQueue<int>();
+            queue.Enqueue(42);
+
+            int result;
+            if (queue.TryDequeue(out result))
+                Console.WriteLine("Dequeued: {0}", result);
+
+
+        }
+
+        public static void ConcurrentDictionaryExample() {
+
+            var dict = new ConcurrentDictionary<string, int>();
+            if (dict.TryAdd("k1", 42))
+                Console.WriteLine("Added");
+
+            if (dict.TryUpdate("k1", 21, 42))
+                Console.WriteLine("42 updated to 21");
+
+            dict["k1"] = 42;
+
+            int r1 = dict.AddOrUpdate("k1", 3, (s, i) => i * 2);
+            int r2 = dict.GetOrAdd("k2", 3);
+
+        }
+
     }
 }
